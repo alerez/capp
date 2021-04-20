@@ -9,7 +9,7 @@
          <option disabled value="">Выберите область</option>
          <option v-for="(getNameOblastis, idx) in this.getNameOblasti" :value="getNameOblastis.id" :key="idx">{{ getNameOblastis.name }}</option>
        </select>
-       <div v-on:click="pushOblastiRoute(optionsValue, idx)">
+       <div v-on:click="pushOblastiRoute(optionsValue)">
          <button>перейти</button>
        </div>
      </div>
@@ -24,7 +24,7 @@ export default {
   name: "mainPageMap",
   data (){
     return {
-      optionsValue: ''
+      optionsValue: {},
     }
   },
   computed: {
@@ -32,11 +32,10 @@ export default {
         [
             'getNameOblasti'
         ]
-    )
+    ),
   },
   methods: {
-    pushOblastiRoute: function pushOblastiRoute(data, dataId) {
-      this.$route.path = dataId
+    pushOblastiRoute: function pushOblastiRoute(data) {
       router.push(data)
     }
   }

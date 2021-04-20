@@ -53,18 +53,17 @@ export default {
   name: "communitiesInfo",
   data() {
     return {
-      a: this.$route.params.id,
-
+      a: this.$route.path.split('/'),
     }
   },
   methods: {
-    // ...mapActions(['GET_Gromad']),
+    ...mapActions(['GET_Gromad']),
   },
   computed: {
     ...mapGetters(['getDatasGromad']),
   },
   created() {
-    // this.GET_Gromad(this.a)
+    this.GET_Gromad(this.a)
   }
 }
 </script>

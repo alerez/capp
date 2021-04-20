@@ -32,7 +32,7 @@ export default new Vuex.Store({
     },
     GET_Gromad : async ({commit}, data) => {
       await axios
-          .post(url + '/gromada?id=' + data,
+          .get(url + '/gromada?' + 'oblastId=' + data[1] + '&regionId=' + data[2] +'&id=' + data[3],
               {headers: {'Content-Type': 'application/json'}})
           .then(response => response.data)
           .then(res => {

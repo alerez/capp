@@ -14,11 +14,6 @@ const routes = [
   },
   {
     path: '/:id',
-    name: 'mainPageMap',
-    component: mainPageMap
-  },
-  {
-    path: '/:id/:id',
     name: 'districtsCommunities',
     component: districtsCommunities,
   },
