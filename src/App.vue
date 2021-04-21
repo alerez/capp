@@ -21,6 +21,10 @@ body{
 .color-blue-bg{
   background-color: #3532DD;
 }
+.flex-box{
+  display:flex;
+  flex-direction:row;
+}
 .flex-box-rov{
   display:flex;
   flex-direction:row;
@@ -43,6 +47,10 @@ h2{
 h3{
 
 }
+.paddingBottom20px{
+  padding-bottom:20px;
+}
+
 </style>
 <script>
 import menuPages from "@/views/menuPages.vue";
