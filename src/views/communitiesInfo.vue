@@ -11,17 +11,11 @@
    </div>
    <div class="flex-box">
      <div class="selectInfo">
-       <div @click="gromadInfo('about')">Про громаду</div>
-       <div @click="gromadInfo('characteristics')">Характеристики громади</div>
-       <div>
-         Показники громади
-       </div>
-       <div>
-         Рейтинг по області
-       </div>
-       <div>
-         Рейтинг по Україні
-       </div>
+       <div @click="gromadInfo('about')" v-bind:class="about ? 'selectInfoActive' : 'selectInfoNone'">Про громаду</div>
+       <div @click="gromadInfo('characteristics')" v-bind:class="characteristics ? 'selectInfoActive' : 'selectInfoNone'">Характеристики громади</div>
+       <div>Показники громади</div>
+       <div>Рейтинг по області</div>
+       <div>Рейтинг по Україні</div>
      </div>
      <div>
        <div v-if="about">
@@ -82,16 +76,33 @@ export default {
   border-bottom: 1px solid #666666;
   cursor:pointer;
   user-select: none;
-  color:#666666;
 }
-.selectInfo > div::after{
+.selectInfoNone{
+  color:#666666;
+  background-color:#ffffff;
+}
+.selectInfoNone:hover{
+  background-color:#F0F0F0;
+}
+.selectInfoNone::before{
   content: 'ᐳ';
   float:right;
   padding-left:36px;
   color:#666666;
 }
-.selectInfo > div:hover{
-  background-color:#F0F0F0;
+.selectInfoActive{
+  color:#FFFFFF;
+  background-color:#A0A0A0;
+}
+.selectInfoActive:hover{
+  background-color:#A0A0A0;
+  color:#FFFFFF;
+}
+.selectInfoActive::before{
+  content: 'ᐳ';
+  float:right;
+  padding-left:36px;
+  color:#FFFFFF;
 }
 .stongInfo{
   font-size:16px;
