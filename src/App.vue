@@ -50,7 +50,15 @@ h3{
 .paddingBottom20px{
   padding-bottom:20px;
 }
-
+.center-flex{
+  display:flex;
+  align-self:center;
+  align-items:center;
+  align-content:center;
+  justify-content:center;
+  justify-items:center;
+  justify-self:center;
+}
 </style>
 <script>
 import menuPages from "@/views/menuPages.vue";

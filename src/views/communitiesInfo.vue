@@ -13,9 +13,9 @@
      <div class="selectInfo">
        <div @click="gromadInfo('about')" v-bind:class="about ? 'selectInfoActive' : 'selectInfoNone'">Про громаду</div>
        <div @click="gromadInfo('characteristics')" v-bind:class="characteristics ? 'selectInfoActive' : 'selectInfoNone'">Характеристики громади</div>
-       <div>Показники громади</div>
-       <div>Рейтинг по області</div>
-       <div>Рейтинг по Україні</div>
+       <div class="selectInfoNone">Показники громади</div>
+       <div class="selectInfoNone">Рейтинг по області</div>
+       <div class="selectInfoNone">Рейтинг по Україні</div>
      </div>
      <div>
        <div v-if="about">
