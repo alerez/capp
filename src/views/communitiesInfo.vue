@@ -84,7 +84,7 @@ export default {
 .selectInfoNone:hover{
   background-color:#F0F0F0;
 }
-.selectInfoNone::before{
+.selectInfoNone::after{
   content: 'ᐳ';
   float:right;
   padding-left:36px;
@@ -98,7 +98,7 @@ export default {
   background-color:#A0A0A0;
   color:#FFFFFF;
 }
-.selectInfoActive::before{
+.selectInfoActive::after{
   content: 'ᐳ';
   float:right;
   padding-left:36px;
