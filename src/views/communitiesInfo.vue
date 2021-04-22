@@ -13,9 +13,9 @@
      <div class="selectInfo">
        <div @click="gromadInfo('about')" v-bind:class="about ? 'selectInfoActive' : 'selectInfoNone'">Про громаду</div>
        <div @click="gromadInfo('characteristics')" v-bind:class="characteristics ? 'selectInfoActive' : 'selectInfoNone'">Характеристики громади</div>
-       <div class="selectInfoNone">Показники громади</div>
-       <div class="selectInfoNone">Рейтинг по області</div>
-       <div class="selectInfoNone">Рейтинг по Україні</div>
+       <div @click="routerTo('/datas')" class="selectInfoNone">Показники громади</div>
+       <div @click="routerTo('/datasFromOblast')" class="selectInfoNone">Рейтинг по області</div>
+       <div @click="routerTo('/datasFromUkraine')" class="selectInfoNone">Рейтинг по Україні</div>
      </div>
      <div>
        <div v-if="about">
@@ -37,6 +37,7 @@
 <script>
 
 import {mapActions, mapGetters} from "vuex";
+import router from "@/router";
 
 
 export default {
@@ -59,6 +60,10 @@ export default {
         this.about = false
         this.characteristics = true
       }
+    },
+    routerTo: function routerTo(data){
+      let a = this.$route.path + data
+      router.push(a)
     }
   },
   computed: {

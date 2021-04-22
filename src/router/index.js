@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import mainPageMap from "@/views/mainPageMap";
 import districtsCommunities from "@/views/districtsCommunities";
 import communitiesInfo from "@/views/communitiesInfo";
+import regionData from "@/views/regionData";
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/:id/:id/:id',
     name: 'communitiesInfo',
     component: communitiesInfo,
+  },
+  {
+    path: '/:id/:id/:id/datas',
+    name: 'regionData',
+    component: regionData,
   },
 ]
 
