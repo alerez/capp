@@ -17,7 +17,8 @@ const getMap = {
 export default new Vuex.Store({
   state: {
       datas: {},
-      communitiesInfo: {}
+      communitiesInfo: {},
+      chartData: {}
   },
   actions: {
     GET_Map : async ({commit}) => {
@@ -43,13 +44,19 @@ export default new Vuex.Store({
               console.log(error);
           });
     },
+    UPPDATE_CHART: async ({commit}, data) => {
+        await commit('uppdateChart', data)
+    }
   },
   mutations: {
     getMap: (state, res) => {
       state.datas = res.data.oblasti
     },
     getGromad: (state, data) => {
-        return state.communitiesInfo = data
+        state.communitiesInfo = data
+    },
+    uppdateChart: (state, data) => {
+        state.chartData = data
     }
   },
   modules: {
@@ -61,6 +68,9 @@ export default new Vuex.Store({
     },
     getDatasGromad: state =>  {
         return state.communitiesInfo
+    },
+    getDataCharts: state => {
+        return state.chartData
     }
   }
 })

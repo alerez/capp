@@ -24,7 +24,7 @@ const routes = [
     component: communitiesInfo,
   },
   {
-    path: '/:id/:id/:id/datas',
+    path: '/:id/:id/:id/data',
     name: 'regionData',
     component: regionData,
   },
