@@ -9,7 +9,7 @@
    <div>
 
    </div>
-   <div class="flex-box">
+   <div class="flex-box dataSelectInfo">
      <div class="selectInfo">
        <div @click="gromadInfo('about')" v-bind:class="about ? 'selectInfoActive' : 'selectInfoNone'">Про громаду</div>
        <div @click="gromadInfo('characteristics')" v-bind:class="characteristics ? 'selectInfoActive' : 'selectInfoNone'">Характеристики громади</div>
@@ -17,7 +17,7 @@
        <div @click="routerTo('/dataFromOblast')" class="selectInfoNone">Рейтинг по області</div>
        <div @click="routerTo('/dataFromUkraine')" class="selectInfoNone">Рейтинг по Україні</div>
      </div>
-     <div>
+     <div class="dataInfo">
        <div v-if="about">
          <div class="paddingBottom20px" v-for="(index, idx) in getDatasGromad.about" :key="idx" >
            <strong class="stongInfo">{{idx}}: </strong><span class="textInfo">{{index}}</span>
@@ -77,7 +77,7 @@ export default {
 
 <style scoped>
 .selectInfo > div{
-  padding: 24px 63px 24px 20px;
+  padding: 24px 53px 24px 20px;
   border-bottom: 1px solid #666666;
   cursor:pointer;
   user-select: none;
@@ -110,17 +110,25 @@ export default {
   color:#FFFFFF;
 }
 .stongInfo{
-  font-size:16px;
+  font-size:18px;
   font-style:normal;
   font-weight:500;
   line-height:25px;
   color:#333333;
 }
 .textInfo{
-  font-size:14px;
+  font-size:16px;
   font-style:normal;
   font-weight:400;
   line-height:25px;
   color:#333333;
+  padding-left:3px;
+}
+.dataInfo{
+  margin-left:108px;
+}
+.dataSelectInfo{
+  margin-top:8vh;
+  margin-left:5vw;
 }
 </style>

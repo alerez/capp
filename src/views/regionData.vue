@@ -80,7 +80,8 @@ export default {
       selectRegionSelectData: 'Iж',
       selectRegionSelectDataIdx: 'Iж',
       dataCharts: {},
-      chartRender: true
+      chartRender: true,
+      VectorSvg: './src/assets/img/svg/Vector.svg'
     }
   },
   computed: {
@@ -143,7 +144,7 @@ export default {
 .selectData{
   display:flex;
   margin-left:5vw;
-  margin-top:10vh;
+  margin-top:8vh;
 }
 
 .selectRegionDataStyle{
@@ -158,7 +159,7 @@ export default {
   font-style: normal;
 }
 .selectRegionDataStyle::after{
-  content:">";
+  content:'ᐳ';
   float:right;
   cursor:pointer;
 }
