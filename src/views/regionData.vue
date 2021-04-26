@@ -35,25 +35,30 @@
 <!--&lt;!&ndash;        </div>&ndash;&gt;-->
 <!--&lt;!&ndash;      </div>&ndash;&gt;-->
 <!--    </div>-->
-    <div v-for="(index, idx) in getDatasGromad.groups" :key="idx">
-      <div @click="selectRegionFunc(idx)" class="selectRegionDataStyle">
-        {{idx}}
-      </div>
-      <div v-if="idx === selectRegionIdx">
-        <div style="margin-left:20px" v-for="(indexs, idxs) in index['vars']" :key="idxs" @click="selectRegionSelectDataFunc(idxs)" class="selectRegionSelectData">
-          {{indexs.name}}
+    <div style="display:flex">
+      <div>
+        <div v-for="(index, idx) in getDatasGromad.groups" :key="idx">
+          <div @click="selectRegionFunc(idx)" class="selectRegionDataStyle">
+            {{idx}}
+          </div>
+          <div v-if="idx === selectRegionIdx">
+            <div style="margin-left:20px" v-for="(indexs, idxs) in index['vars']" :key="idxs" @click="selectRegionSelectDataFunc(idxs)" class="selectRegionSelectData">
+              {{indexs.name}}
+            </div>
+          </div>
+          <div>
+          </div>
         </div>
       </div>
       <div>
-      </div>
-    </div>
-    <div>
-      <div v-for="indexss in dataGroupsSelectRegionVarsDataIdx" :key="indexss">
-        <div v-if="indexss === selectRegionSelectDataIdx">
-          <chart-views/>
+        <div v-for="indexss in dataGroupsSelectRegionVarsDataIdx" :key="indexss">
+          <div v-if="indexss === selectRegionSelectDataIdx">
+            <chart-views/>
+          </div>
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
