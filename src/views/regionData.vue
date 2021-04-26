@@ -36,17 +36,22 @@
 <!--&lt;!&ndash;      </div>&ndash;&gt;-->
 <!--    </div>-->
     <div style="display:flex">
-      <div>
-        <div v-for="(index, idx) in getDatasGromad.groups" :key="idx">
-          <div @click="selectRegionFunc(idx)" class="selectRegionDataStyle">
+      <div style="display:flex">
+        <div>
+          <div v-for="(index, idx) in getDatasGromad.groups" :key="idx">
+          <div @click="selectRegionFunc(idx)" v-bind:class="(idx === selectRegionIdx) ? 'selectRegionDataActive' : 'selectRegionData' " class="selectRegionDataStyle">
             {{idx}}
           </div>
-          <div v-if="idx === selectRegionIdx">
-            <div style="margin-left:20px" v-for="(indexs, idxs) in index['vars']" :key="idxs" @click="selectRegionSelectDataFunc(idxs)" class="selectRegionSelectData">
-              {{indexs.name}}
-            </div>
-          </div>
-          <div>
+          <!--          <div v-if="idx === selectRegionIdx">-->
+          <!--            <div style="margin-left:20px" v-for="(indexs, idxs) in dataGroupsSelectRegionVars" :key="idxs" @click="selectRegionSelectDataFunc(idxs)" class="selectRegionSelectData">-->
+          <!--              {{indexs.name}}-->
+          <!--            </div>-->
+          <!--          </div>-->
+        </div>
+        </div>
+        <div>
+          <div style="margin-left:20px" v-for="(indexs, idxs) in dataGroupsSelectRegionVars" :key="idxs" @click="selectRegionSelectDataFunc(idxs)" v-bind:class="(idxs === selectRegionSelectDataIdx) ? 'selectRegionSelectDataActive' : 'selectRegionSelectData' ">
+            {{indexs.name}}
           </div>
         </div>
       </div>
