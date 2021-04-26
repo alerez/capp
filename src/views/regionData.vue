@@ -35,12 +35,12 @@
 <!--&lt;!&ndash;        </div>&ndash;&gt;-->
 <!--&lt;!&ndash;      </div>&ndash;&gt;-->
 <!--    </div>-->
-    <div style="display:flex">
+    <div class="selectData">
       <div style="display:flex">
         <div>
           <div v-for="(index, idx) in getDatasGromad.groups" :key="idx">
           <div @click="selectRegionFunc(idx)" v-bind:class="(idx === selectRegionIdx) ? 'selectRegionDataActive' : 'selectRegionData' " class="selectRegionDataStyle">
-            {{idx}}
+            {{index.name = index.name[0].toUpperCase() + index.name.substring(1).toLowerCase()}}
           </div>
           <!--          <div v-if="idx === selectRegionIdx">-->
           <!--            <div style="margin-left:20px" v-for="(indexs, idxs) in dataGroupsSelectRegionVars" :key="idxs" @click="selectRegionSelectDataFunc(idxs)" class="selectRegionSelectData">-->
@@ -49,17 +49,15 @@
           <!--          </div>-->
         </div>
         </div>
-        <div>
-          <div style="margin-left:20px" v-for="(indexs, idxs) in dataGroupsSelectRegionVars" :key="idxs" @click="selectRegionSelectDataFunc(idxs)" v-bind:class="(idxs === selectRegionSelectDataIdx) ? 'selectRegionSelectDataActive' : 'selectRegionSelectData' ">
+        <div style="margin-top:-5px;">
+          <div v-for="(indexs, idxs) in dataGroupsSelectRegionVars" :key="idxs" @click="selectRegionSelectDataFunc(idxs)" v-bind:class="(idxs === selectRegionSelectDataIdx) ? 'selectRegionSelectDataActive' : 'selectRegionSelectData' " class="selectRegionDataSelect">
             {{indexs.name}}
           </div>
         </div>
       </div>
-      <div>
-        <div v-for="indexss in dataGroupsSelectRegionVarsDataIdx" :key="indexss">
-          <div v-if="indexss === selectRegionSelectDataIdx">
-            <chart-views/>
-          </div>
+      <div v-for="indexss in dataGroupsSelectRegionVarsDataIdx" :key="indexss">
+        <div v-if="indexss === selectRegionSelectDataIdx">
+          <chart-views class="charts"/>
         </div>
       </div>
     </div>
@@ -143,17 +141,18 @@ export default {
 
 <style scoped>
 .selectData{
-  display:block;
-  width:550px;
+  display:flex;
+  margin-left:5vw;
+  margin-top:10vh;
 }
 
 .selectRegionDataStyle{
-  width:280px;
-  height:66px;
+  width:250px;
   cursor:pointer;
+  padding:16px;
 }
 .selectRegionDataStyle > p{
-  width:156px;
+  width:136px;
   font-weight: 500;
   font-size: 18px;
   font-style: normal;
@@ -161,7 +160,6 @@ export default {
 .selectRegionDataStyle::after{
   content:">";
   float:right;
-  margin-right:14px;
   cursor:pointer;
 }
 
@@ -183,9 +181,8 @@ export default {
 
 
 .selectRegionDataSelect{
-  position:absolute;
-
-  margin-left:300px;
+  margin-left:20px;
+  margin-right:30px;
 
   font-style: normal;
   font-weight: normal;
@@ -196,7 +193,7 @@ export default {
 }
 
 .selectRegionSelectData{
-  width:226px;
+  width:196px;
   margin-top:16px;
   padding-top:2px;
   padding-bottom:18px;
@@ -206,7 +203,7 @@ export default {
   cursor:pointer;
 }
 .selectRegionSelectDataActive{
-  width:226px;
+  width:196px;
   margin-top:16px;
   padding-top:2px;
   padding-bottom:18px;
@@ -214,5 +211,9 @@ export default {
   border-top: 2px solid #3532DD;
 
   color: #333333
+}
+
+.charts{
+  width:650px;
 }
 </style>
