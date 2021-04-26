@@ -1,4 +1,4 @@
-<template>
+<template v-if="this.dataValue">
   <div>
     <div>
 
@@ -6,24 +6,50 @@
     <div>
 
     </div>
-    <div style="display:flex;">
-      <div class="selectData">
-        <div v-for="(index, idx) in getDatasGromad.groups" :key="idx">
-          <div class="selectRegionDataStyle" @click="selectRegionFunc(idx)">
-            <p>{{index.name = index.name[0].toUpperCase() + index.name.substring(1).toLowerCase()}}</p>
-          </div>
+<!--    <div style="display:flex;">-->
+<!--      <div class="selectData">-->
+<!--        <div v-for="(index, idx) in dataGroups" :key="index">-->
+<!--          <div class="selectRegionDataStyle" @click="selectRegionFunc(idx)">-->
+<!--            <p>{{index.name}}</p>-->
+<!--&lt;!&ndash;            = index.name[0].toUpperCase() + index.name.substring(1).toLowerCase()&ndash;&gt;-->
+<!--          </div>-->
+<!--            <div v-for="(indexs, idxs) in index.vars" :key="idxs" @click="selectRegionSelectDataFunc(idxs)" class="selectRegionSelectData">-->
+<!--              <div v-if="idx === selectRegionIdx">-->
+<!--                <p>{{indexs.name}}</p>-->
+<!--                {{idxs}}-->
+<!--              </div>-->
+<!--              <p>{{indexs}}</p>-->
+<!--              </div>-->
+<!--          </div>-->
+<!--      </div>-->
+<!--&lt;!&ndash;      <div v-if="this.selectRegionIdx === 'ДЕМОГРАФІЯ'" class="selectRegionDataSelect">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div v-for="(indexs, idxs) in this.dataGroupsSelectRegionVars" :key="idxs" @click="selectRegionSelectDataFunc(idxs)" class="selectRegionSelectData">&ndash;&gt;-->
+<!--&lt;!&ndash;          <p>{{indexs.name}}</p>&ndash;&gt;-->
+<!--&lt;!&ndash;          {{idxs}}&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      <div v-else-if="this.dataGroups === 'ЕКОНОМІКА'" class="selectRegionDataSelect">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div v-for="(indexs, idxs) in this.dataGroupsSelectRegionVars" :key="idxs" @click="selectRegionSelectDataFunc(idxs)" class="selectRegionSelectData">&ndash;&gt;-->
+<!--&lt;!&ndash;          <p>{{indexs.name}}</p>&ndash;&gt;-->
+<!--&lt;!&ndash;          {{idxs}}&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--    </div>-->
+    <div v-for="(index, idx) in getDatasGromad.groups" :key="idx">
+      <div @click="selectRegionFunc(idx)" class="selectRegionDataStyle">
+        {{idx}}
+      </div>
+      <div v-if="idx === selectRegionIdx">
+        <div style="margin-left:20px" v-for="(indexs, idxs) in index['vars']" :key="idxs" @click="selectRegionSelectDataFunc(idxs)" class="selectRegionSelectData">
+          {{indexs.name}}
         </div>
       </div>
-      <div class="selectRegionDataSelect">
-        <div v-for="(indexs, idxs) in getDatasGromad.groups[selectRegionIdx]['vars']" :key="idxs" @click="selectRegionSelectDataFunc(idxs)" class="selectRegionSelectData">
-          <p>{{indexs.name}}</p>
-        </div>
+      <div>
       </div>
     </div>
     <div>
-      <div v-for="indexss in getDatasGromad.groups[selectRegionIdx].vars[selectRegionSelectDataIdx].values" :key="indexss">
-        <div v-if="indexss">
-          {{indexss}}
+      <div v-for="indexss in dataGroupsSelectRegionVarsDataIdx" :key="indexss">
+        <div v-if="indexss === selectRegionSelectDataIdx">
           <chart-views/>
         </div>
       </div>
@@ -51,20 +77,46 @@ export default {
   },
   computed: {
     ...mapGetters(['getDatasGromad']),
+
+    dataGroups () {
+      return this.getDatasGromad.groups
+    },
+    dataGroupsSelectRegion () {
+      let selectRegion = this.selectRegionIdx;
+      return this.dataGroups[selectRegion]
+    },
+    dataGroupsSelectRegionVars () {
+      return this.dataGroupsSelectRegion['vars']
+    },
+    dataGroupsSelectRegionVarsDataIdx () {
+      return this.dataGroupsSelectRegionVars[this.selectRegionSelectDataIdx]
+    },
+    dataValue () {
+      return this.dataGroupsSelectRegionVarsDataIdx.values
+    },
+
+
+
   },
   methods: {
     ...mapActions(['GET_Gromad', 'UPPDATE_CHART']),
     selectRegionFunc: function selectRegionFunc(idx){
-      this.selectRegionIdx = idx
+      if (this.selectRegionIdx === idx){
+        this.selectRegionSelectDataIdx = ''
+        this.selectRegionIdx = idx
+      }
+      else{
+        this.selectRegionIdx = idx
         this.dataCharts = {
-          data: this.getDatasGromad.groups[this.selectRegionIdx].vars[this.selectRegionSelectDataIdx].values
+          data: this.dataValue
         }
-      this.UPPDATE_CHART(this.dataCharts);
+        this.UPPDATE_CHART(this.dataCharts);
+      }
     },
     selectRegionSelectDataFunc: function selectRegionSelectDataFunc(idxs){
       this.selectRegionSelectDataIdx = idxs
         this.dataCharts = {
-          data: this.getDatasGromad.groups[this.selectRegionIdx].vars[this.selectRegionSelectDataIdx].values
+          data: this.dataValue
         }
       this.UPPDATE_CHART(this.dataCharts);
     }
@@ -72,7 +124,7 @@ export default {
   async created() {
     await this.GET_Gromad(this.a)
     this.dataCharts = {
-      data: this.getDatasGromad.groups[this.selectRegionIdx].vars[this.selectRegionSelectDataIdx].values
+      data: this.dataValue
     }
     await this.UPPDATE_CHART(this.dataCharts);
   },
@@ -81,7 +133,6 @@ export default {
 
 <style scoped>
 .selectData{
-  border:solid 1px #333333;
   display:block;
   width:550px;
 }
@@ -141,6 +192,8 @@ export default {
   padding-bottom:18px;
 
   color: #666666;
+
+  cursor:pointer;
 }
 .selectRegionSelectDataActive{
   width:226px;
