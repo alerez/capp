@@ -1,10 +1,10 @@
 <template v-if="this.dataValue">
   <div>
     <div>
-
+      <bread-rumbs v-bind:breadCrumbsDate="this.breadCrumbsDate"/>
     </div>
     <div>
-
+      <back-next v-bind:backNextData="this.backNextData"/>
     </div>
 <!--    <div style="display:flex;">-->
 <!--      <div class="selectData">-->
@@ -67,11 +67,13 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import ChartViews from "@/views/chartViews";
+import ChartViews from "@/views/chartViews.vue";
+import BackNext from "@/views/backNext.vue";
+import breadRumbs from "@/views/breadRumbs.vue";
 
 export default {
   name: "regionData",
-  components: {ChartViews},
+  components: {breadRumbs, BackNext, ChartViews},
   data() {
     return {
       a: this.$route.path.split('/'),
@@ -81,7 +83,7 @@ export default {
       selectRegionSelectDataIdx: 'Iж',
       dataCharts: {},
       chartRender: true,
-      VectorSvg: './src/assets/img/svg/Vector.svg'
+      VectorSvg: './src/assets/img/svg/Vector.svg',
     }
   },
   computed: {
@@ -103,7 +105,12 @@ export default {
     dataValue () {
       return this.dataGroupsSelectRegionVarsDataIdx.values
     },
-
+    backNextData () {
+      return '/' + this.a[1] + '/' + this.a[2] + '/' + this.a[3]
+    },
+    breadCrumbsDate () {
+      return '/' + this.a[1]
+    }
 
 
   },

@@ -1,13 +1,13 @@
 <template>
  <div>
-    <div>
-
-    </div>
    <div>
-
+     <bread-rumbs v-bind:breadCrumbsDate="this.breadCrumbsDate"/>
    </div>
    <div>
-
+     <back-next v-bind:backNextData="this.backNextData"/>
+   </div>
+   <div>
+      <NameGromad v-bind:nameGromad="this.nameGromad"/>
    </div>
    <div class="flex-box dataSelectInfo">
      <div class="selectInfo">
@@ -38,15 +38,19 @@
 
 import {mapActions, mapGetters} from "vuex";
 import router from "@/router";
+import NameGromad from "@/views/nameGromad.vue";
+import BackNext from "@/views/backNext.vue";
+import breadRumbs from "@/views/breadRumbs.vue";
 
 
 export default {
   name: "communitiesInfo",
+  components: {breadRumbs, BackNext, NameGromad},
   data() {
     return {
       a: this.$route.path.split('/'),
       about: true,
-      characteristics: false
+      characteristics: false,
     }
   },
   methods: {
@@ -68,6 +72,18 @@ export default {
   },
   computed: {
     ...mapGetters(['getDatasGromad']),
+    backNextData () {
+      return '/' + this.a[1]
+    },
+    breadCrumbsDate () {
+      return '/' + this.a[1]
+    },
+    nameGromad () {
+      return {
+        data: this.getDatasGromad.about,
+        type: this.getDatasGromad.about
+      }
+    }
   },
   created() {
     this.GET_Gromad(this.a)

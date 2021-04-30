@@ -1,10 +1,10 @@
 <template>
   <div>
     <div>
-
+      <bread-rumbs v-bind:breadCrumbsDate="this.breadCrumbsDate"/>
     </div>
     <div>
-
+      <back-next v-bind:backNextData="this.backNextData"/>
     </div>
     <div class="center-flex">
       <div class="divRegion" v-if="getNameOblasti[routerID]">
@@ -25,17 +25,25 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
+import BackNext from "@/views/backNext.vue";
+import breadRumbs from "@/views/breadRumbs.vue";
 
 export default {
   name: "districtsCommunities",
+  components: {breadRumbs, BackNext},
   data() {
     return {
+      a: this.$route.path.split('/'),
       routerID: this.$route.params.id,
-      selectRegion: ''
+      selectRegion: '',
+      backNextData: '/',
     }
   },
   computed: {
-    ...mapGetters(['getNameOblasti'])
+    ...mapGetters(['getNameOblasti']),
+    breadCrumbsDate () {
+      return '/' + this.a[1]
+    }
   },
   methods: {
     selectedRegion: function selectedRegion(data){
