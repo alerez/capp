@@ -75,6 +75,10 @@ export default {
   padding:40px;
   width:1146px;
 }
+.h2:hover{
+  background-color:#f0f0f0;
+  cursor:pointer;
+}
 .h2Font::after{
   display:block;
   content:'-';
@@ -86,6 +90,9 @@ export default {
   float:right;
   margin-right:46px;
 }
+.h2Font{
+
+}
 a{
   margin-left:98px;
   font-style: normal;
@@ -96,6 +103,20 @@ a{
   text-decoration:none;
   position: relative;
   display:block;
-  padding-bottom:30px;
+  padding-top:20px;
+  padding-bottom:20px;
+}
+a:hover{
+  padding-left:10px;
+}
+a:hover:after{
+  margin-left:10px;
+  content: ">";
+}
+.divGromadLink{
+
+}
+.divGromadLink:hover{
+  background-color:#F0F0F0;
 }
 </style>

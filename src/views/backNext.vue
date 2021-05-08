@@ -28,5 +28,7 @@ div{
 }
 .marginDiv{
   margin-left:6vw;
+  margin-top:20px;
+  margin-bottom:20px;
 }
 </style>

@@ -15,5 +15,8 @@ export default {
 <style scoped>
 div{
   margin-left:3vw;
+  color:#333333;
+  font-size:24px;
+  font-weight:500;
 }
 </style>

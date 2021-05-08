@@ -32,6 +32,8 @@ export default {
 .breadRumbs{
   display:flex;
   margin-left:6vw;
+  margin-top:40px;
+  margin-bottom:20px;
 }
 .breadRumbs > div{
   margin:3px;
