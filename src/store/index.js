@@ -18,7 +18,9 @@ export default new Vuex.Store({
   state: {
       datas: {},
       communitiesInfo: {},
-      chartData: {}
+      gromPosicion: {},
+      chartData: {},
+      mapGromadName: {}
   },
   actions: {
     GET_Map : async ({commit}) => {
@@ -26,6 +28,7 @@ export default new Vuex.Store({
           .then(response => response.data)
           .then(res => {
             commit('getMap', res)
+            commit('getMapGromadName', res)
           })
           .catch(function (error) {
             console.log(error);
@@ -44,6 +47,19 @@ export default new Vuex.Store({
               console.log(error);
           });
     },
+      GET_GromadPosicion : async ({commit}, data) => {
+          await axios
+              .get(url + '/compare?' + 'kind=' + data[0] + '&year=' + data[1] +'&var=' + data[2] +'&oblasti=' + data[3],
+                  {headers: {'Content-Type': 'application/json'}})
+              .then(response => response.data)
+              .then(res => {
+                  commit('gromadPosicion', res.data)
+              })
+              .catch(function (error) {
+                  commit('gromadPosicion', '')
+                  console.log(error);
+              });
+      },
     UPPDATE_CHART: async ({commit}, data) => {
         await commit('uppdateChart', data)
     }
@@ -52,8 +68,14 @@ export default new Vuex.Store({
     getMap: (state, res) => {
       state.datas = res.data.oblasti
     },
+    getMapGromadName: (state, res) => {
+        state.mapGromadName = res.data.oblasti.map(a => a.id)
+    },
     getGromad: (state, data) => {
         state.communitiesInfo = data
+    },
+    gromadPosicion: (state, data) => {
+        state.gromPosicion = data
     },
     uppdateChart: (state, data) => {
         state.chartData = data
@@ -66,11 +88,18 @@ export default new Vuex.Store({
     getNameOblasti: state => {
       return state.datas
     },
+
     getDatasGromad: state =>  {
         return state.communitiesInfo
     },
+    gromadPosicion: state =>  {
+        return state.gromPosicion
+    },
     getDataCharts: state => {
         return state.chartData
+    },
+    getMapGromadNameData: state => {
+        return state.mapGromadName
     }
   }
 })

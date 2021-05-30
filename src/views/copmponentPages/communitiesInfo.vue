@@ -38,9 +38,9 @@
 
 import {mapActions, mapGetters} from "vuex";
 import router from "@/router";
-import NameGromad from "@/views/nameGromad.vue";
-import BackNext from "@/views/backNext.vue";
-import breadRumbs from "@/views/breadRumbs.vue";
+import NameGromad from "@/views/componentView/nameGromad.vue";
+import BackNext from "@/views/componentView/backNext.vue";
+import breadRumbs from "@/views/componentView/breadRumbs.vue";
 
 
 export default {

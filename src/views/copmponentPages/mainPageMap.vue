@@ -131,6 +131,28 @@ export default {
   data (){
     return {
       optionsValue: '',
+      options: [
+        {
+          title: 'Read the Docs',
+          icon: 'fa-book',
+          url: 'https://codeclimate.com/github/sagalbot/vue-select'
+        },
+        {
+          title: 'View on GitHub',
+          icon: 'fa-github',
+          url: 'https://codeclimate.com/github/sagalbot/vue-select'
+        },
+        {
+          title: 'View on NPM',
+          icon: 'fa-database',
+          url: 'https://codeclimate.com/github/sagalbot/vue-select'
+        },
+        {
+          title: 'View Codepen Examples',
+          icon: 'fa-pencil',
+          url: 'https://codeclimate.com/github/sagalbot/vue-select'
+        }
+      ]
     }
   },
   computed: {
@@ -139,6 +161,13 @@ export default {
             'getNameOblasti'
         ]
     ),
+    // valueOblast () {
+    //   return this.getNameOblasti.map(a => {
+    //
+    //   })
+    // },
+    //
+    // v-for="(getNameOblastis, idx) in this.getNameOblasti" :value="getNameOblastis.id" :key="idx"
   },
   methods: {
     pushOblastiRoute: function pushOblastiRoute(data) {
@@ -185,4 +214,50 @@ h1{
 path:hover{
   fill:#FFE24C;
 }
+
+
+
+
+
+
+
+
+h1,.muted {
+  color: #2c3e5099;
+}
+
+h1 {
+  font-size: 26px;
+  font-weight: 600;
+  text-rendering: optimizelegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-text-size-adjust: none;
+}
+
+#selects {
+  max-width: 30em;
+  margin: 1em auto;
+}
+
+#selects .dropdown li {
+  border-bottom: 1px solid rgba(112, 128, 144, 0.1)
+}
+
+#selects .dropdown li:last-child {
+  border-bottom: none;
+}
+
+#selects .dropdown li a {
+  padding: 10px 20px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  font-size: 1.25em;
+}
+
+#selects .dropdown li a .fa {
+  padding-right: 0.5em;
+}
+
+
 </style>

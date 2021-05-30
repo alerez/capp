@@ -21,9 +21,9 @@
 <!--        <input placeholder="Введіть назву для пошуку">-->
 <!--      </label>-->
 <!--    </div>-->
-    <div class="flex-box-rov">
+    <div class="flex-box-rov rightMenu">
       <div>
-        <a>Заєреструвати громаду</a>
+        <a href="https://docs.google.com/forms/d/1JE7k_LlqtCU11s6RY7oUTt0pej7ibhfevu57ToBkexM/edit" style="text-decoration:none">Заєреструвати громаду</a>
       </div>
       <div>
         <a>Про проект</a>
@@ -45,5 +45,11 @@ a{
   line-height:17px;
   color:#fff;
   margin-left:65px;
+}
+.rightMenu{
+  margin-left:40vw;
+}
+.rightMenu > div{
+  width:250px;
 }
 </style>

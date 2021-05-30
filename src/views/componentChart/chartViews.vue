@@ -42,13 +42,13 @@ export default {
           ],
           datasets: [
             {
-              label: 'fd',
+              label: '',
               borderColor: "#FC2525",
               pointBackgroundColor: "white",
               borderWidth: 2,
               pointBorderColor: "blue",
               backgroundColor: this.gradient,
-              data: [0, this.getDataCharts.data[0].value]
+              data: [0, this.getDataCharts.data[0].value.toFixed(2)]
             },
           ]
         },

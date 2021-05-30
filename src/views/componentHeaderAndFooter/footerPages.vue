@@ -16,6 +16,6 @@ div{
   width:100vw;
   height:60px;
   display:block;
-  margin-top:100vh;
+  margin-top:30vh;
 }
 </style>

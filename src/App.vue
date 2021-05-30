@@ -61,8 +61,8 @@ h3{
 }
 </style>
 <script>
-import menuPages from "@/views/menuPages.vue";
-import FooterPages from "@/views/footerPages";
+import menuPages from "@/views/componentHeaderAndFooter/menuPages.vue";
+import FooterPages from "@/views/componentHeaderAndFooter/footerPages";
 import {mapActions} from "vuex"
 export default {
   components: {FooterPages, menuPages},

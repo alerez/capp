@@ -67,9 +67,9 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import ChartViews from "@/views/chartViews.vue";
-import BackNext from "@/views/backNext.vue";
-import breadRumbs from "@/views/breadRumbs.vue";
+import ChartViews from "@/views/componentChart/chartViews.vue";
+import BackNext from "@/views/componentView/backNext.vue";
+import breadRumbs from "@/views/componentView/breadRumbs.vue";
 
 export default {
   name: "regionData",

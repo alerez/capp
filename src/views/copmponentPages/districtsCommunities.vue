@@ -25,8 +25,8 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import BackNext from "@/views/backNext.vue";
-import breadRumbs from "@/views/breadRumbs.vue";
+import BackNext from "@/views/componentView/backNext.vue";
+import breadRumbs from "@/views/componentView/breadRumbs.vue";
 
 export default {
   name: "districtsCommunities",
