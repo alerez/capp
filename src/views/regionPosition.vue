@@ -84,9 +84,9 @@
           </div>
 <!--          График-->
           <div v-for="indexss in dataGroupsSelectRegionVarsDataIdx" :key="indexss">
-            <div v-if="indexss === dataValue">
-              <GChart style="height:500px; width:600px" type="BarChart" :data="chartData"/>
-            </div>
+            <div v-if="indexss === selectRegionSelectDataIdx">
+              <GChart style="height:500px; width:600px" type="BarChart" :data="chartDataData"/>
+          </div>
           </div>
         </div>
       </div>
@@ -148,14 +148,12 @@ export default {
       return '/' + this.a[1]
     },
     chartData () {
-      return this.gromadPosicion.list.map((element) => {
-        console.log(element.name.toString())
-        console.log(element.value)
+      return this.gromadPosicion['list'].map((element) => {
         return [element.name.toString(), element.value]
       } )
     },
     chartDataData () {
-      return this.chartData.unshift(['Year', '',])
+      return [['Year', '']].concat(this.chartData)
     }
   },
   methods: {
