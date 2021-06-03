@@ -6,58 +6,27 @@
     <div>
       <back-next v-bind:backNextData="this.backNextData"/>
     </div>
-    <!--    <div style="display:flex;">-->
-    <!--      <div class="selectData">-->
-    <!--        <div v-for="(index, idx) in dataGroups" :key="index">-->
-    <!--          <div class="selectRegionDataStyle" @click="selectRegionFunc(idx)">-->
-    <!--            <p>{{index.name}}</p>-->
-    <!--&lt;!&ndash;            = index.name[0].toUpperCase() + index.name.substring(1).toLowerCase()&ndash;&gt;-->
-    <!--          </div>-->
-    <!--            <div v-for="(indexs, idxs) in index.vars" :key="idxs" @click="selectRegionSelectDataFunc(idxs)" class="selectRegionSelectData">-->
-    <!--              <div v-if="idx === selectRegionIdx">-->
-    <!--                <p>{{indexs.name}}</p>-->
-    <!--                {{idxs}}-->
-    <!--              </div>-->
-    <!--              <p>{{indexs}}</p>-->
-    <!--              </div>-->
-    <!--          </div>-->
-    <!--      </div>-->
-    <!--&lt;!&ndash;      <div v-if="this.selectRegionIdx === 'ДЕМОГРАФІЯ'" class="selectRegionDataSelect">&ndash;&gt;-->
-    <!--&lt;!&ndash;        <div v-for="(indexs, idxs) in this.dataGroupsSelectRegionVars" :key="idxs" @click="selectRegionSelectDataFunc(idxs)" class="selectRegionSelectData">&ndash;&gt;-->
-    <!--&lt;!&ndash;          <p>{{indexs.name}}</p>&ndash;&gt;-->
-    <!--&lt;!&ndash;          {{idxs}}&ndash;&gt;-->
-    <!--&lt;!&ndash;        </div>&ndash;&gt;-->
-    <!--&lt;!&ndash;      </div>&ndash;&gt;-->
-    <!--&lt;!&ndash;      <div v-else-if="this.dataGroups === 'ЕКОНОМІКА'" class="selectRegionDataSelect">&ndash;&gt;-->
-    <!--&lt;!&ndash;        <div v-for="(indexs, idxs) in this.dataGroupsSelectRegionVars" :key="idxs" @click="selectRegionSelectDataFunc(idxs)" class="selectRegionSelectData">&ndash;&gt;-->
-    <!--&lt;!&ndash;          <p>{{indexs.name}}</p>&ndash;&gt;-->
-    <!--&lt;!&ndash;          {{idxs}}&ndash;&gt;-->
-    <!--&lt;!&ndash;        </div>&ndash;&gt;-->
-    <!--&lt;!&ndash;      </div>&ndash;&gt;-->
-    <!--    </div>-->
     <div style="display:flex">
       <div class="selectData">
         <div style="display:flex">
+          <!--        Выбор Груп показателей-->
           <div>
-            <div v-for="(index, idx) in getDatasGromad.groups" :key="idx">
+            <div v-for="(index, idx) in this.dataGroups" :key="idx">
               <div @click="selectRegionFunc(idx)" v-bind:class="(idx === selectRegionIdx) ? 'selectRegionDataActive' : 'selectRegionData' " class="selectRegionDataStyle">
                 {{index.name = index.name[0].toUpperCase() + index.name.substring(1).toLowerCase()}}
               </div>
-              <!--          <div v-if="idx === selectRegionIdx">-->
-              <!--            <div style="margin-left:20px" v-for="(indexs, idxs) in dataGroupsSelectRegionVars" :key="idxs" @click="selectRegionSelectDataFunc(idxs)" class="selectRegionSelectData">-->
-              <!--              {{indexs.name}}-->
-              <!--            </div>-->
-              <!--          </div>-->
             </div>
           </div>
+          <!--        Выбор Показателей-->
           <div style="margin-top:-5px;">
-            <div v-for="(indexs, idxs) in dataGroupsSelectRegionVars" :key="idxs" @click="selectRegionSelectData(idxs)" v-bind:class="(idxs === selectRegionSelectDataIdx) ? 'selectRegionSelectDataActive' : 'selectRegionSelectData' " class="selectRegionDataSelect">
+            <div v-for="(indexs, idxs) in dataGroupsSelectRegionVars" :key="idxs" @click="selectRegionSelectDataFunc(idxs)" v-bind:class="(idxs === selectRegionSelectDataIdx) ? 'selectRegionSelectDataActive' : 'selectRegionSelectData' " class="selectRegionDataSelect">
               {{indexs.name}}
             </div>
           </div>
         </div>
         <div>
           <div>
+<!--            области укр-->
             <div class="flex-select">
               <div>
                 <div v-if="'oblasti' !== this.typeOblast">
@@ -74,29 +43,28 @@
                 <p>Громади по областям</p>
               </div>
             </div>
-            <!--        <div>-->
-            <!--          <input type="text">-->
-            <!--        </div>-->
-            <!--        <div>-->
-            <!--          <div>-->
-            <!--            Кіровоградська область-->
-            <!--          </div>-->
-            <!--        </div>-->
-            <div style="width:206px; margin-top:34px; margin-left:16px">
-              <select class="selectYe">
-                <option>Рік показників</option>
-                <option>2021</option>
-              </select>
+<!--            селект года-->
+            <div>
+              <div style="width:206px; margin-top:34px; margin-left:16px">
+                <select class="selectYe">
+                  <option>Рік показників</option>
+                  <option @click="selectYear('2021')" v-show="this.year !== '2021'">2021</option>
+                </select>
+              </div>
+              <div>
+                <p v-show="this.year">{{this.year}}</p>
+              </div>
             </div>
+<!--            сортиорвка по-->
             <div style="display:flex; margin-top:34px;">
               <div style="width:206px;margin-left:42px">
                 <p>Сортувати за:</p>
               </div>
               <div class="selectSort">
-                <p v-bind:class="{'activeSelectSort': (this.sortDataChart === 'ab')}">Алфавітом</p>
-                <p v-bind:class="{'activeSelectSort': (this.sortDataChart === 'chisel')}">Показниками</p>
+                <p v-bind:class="{'activeSelectSort': (this.sortDataChart === 'ab')}" @click="activeSelectSortFunc('ab')">Алфавітом</p>
+                <p v-bind:class="{'activeSelectSort': (this.sortDataChart === 'chisel')}" @click="activeSelectSortFunc('chisel')">Показниками</p>
               </div>
-              <div class="sortAndTopToButtom" v-bind:class="{'activeSelectSort': (this.sortDataLowToHide === 'top')}">
+              <div class="sortAndTopToButtom" v-bind:class="{'activeSelectSort': (this.sortDataLowToHide === 'top')}" @click="sortAndTopToButtomFunc('top')">
                 <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M14.0908 21L14.0908 6" stroke="#828282" stroke-linecap="round"/>
                   <path d="M14.0908 6L18.1817 10.0909" stroke="#828282" stroke-linecap="round"/>
@@ -104,7 +72,7 @@
                   <path d="M22.875 26H4.125C2.39911 26 1 24.6009 1 22.875V4.125C1 2.39911 2.39911 1 4.125 1H22.875C24.6009 1 26 2.39911 26 4.125V22.875C26 24.6009 24.6009 26 22.875 26Z" stroke="#828282" stroke-linejoin="round"/>
                 </svg>
               </div>
-              <div class="sortAndTopToButtom" v-bind:class="{'activeSelectSort': (this.sortDataLowToHide === 'bottom')}">
+              <div class="sortAndTopToButtom" v-bind:class="{'activeSelectSort': (this.sortDataLowToHide === 'bottom')}" @click="sortAndTopToButtomFunc('bottom')">
                 <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M14.0908 6L14.0908 21" stroke="#828282" stroke-linecap="round"/>
                   <path d="M14.0908 21L18.1817 16.9091" stroke="#828282" stroke-linecap="round"/>
@@ -114,38 +82,27 @@
               </div>
             </div>
           </div>
+<!--          График-->
           <div v-for="indexss in dataGroupsSelectRegionVarsDataIdx" :key="indexss">
-            <div v-if="indexss === selectRegionSelectDataIdx">
-              <GChart v-if="gromadPosicion" style="height:500px; width:600px" type="BarChart" :data="chartData"/>
-              <!--          <div v-for="ix in gromadPosicion">-->
-              <!--            <div v-for="ixs in ix">-->
-              <!--              <div v-for="(ixss, keyixss) in ixs" key="keyixss" style="width:50%; display:flex">-->
-              <!--                <div v-if="keyixss === 'value'" style="display:flex; width:200px">-->
-              <!--                  <div>{{ixss}}</div>-->
-              <!--                  <div v-bind:style="{ width: (ixss+ixss)/ixss + 'vw' }" style="height:32px; background-color:#3532DD"></div>-->
-              <!--                </div>-->
-              <!--              </div>-->
-              <!--            </div>-->
-              <!--          </div>-->
-              <!--          <chart-views class="charts" :data="chartData"/>-->
+            <div v-if="indexss === dataValue">
+              <GChart style="height:500px; width:600px" type="BarChart" :data="chartData"/>
             </div>
           </div>
         </div>
       </div>
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
 import breadRumbs from "@/views/componentView/breadRumbs";
 import BackNext from "@/views/componentView/backNext";
-import ChartViews from "@/views/componentChart/chartViews";
 import { GChart } from 'vue-google-charts'
 import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: "regionPosition",
-  components: {breadRumbs, BackNext, ChartViews, GChart},
+  components: {breadRumbs, BackNext, GChart},
   data() {
     return {
       a: this.$route.path.split('/'),
@@ -159,7 +116,7 @@ export default {
       oblastData: [''],
       gromadData: [''],
       gromadFromOdlastData: [''],
-      year: '2021',
+      year: '',
       sortDataChart: 'ab',
       sortDataLowToHide: 'top',
       typeOblast: 'oblasti'
@@ -200,19 +157,9 @@ export default {
     chartDataData () {
       return this.chartData.unshift(['Year', '',])
     }
-
-
-//     [
-//         ['Year', '', '', ''],
-//         ['2014', 1000, 400, 200],
-//         ['2015', 1170, 460, 250],
-//         ['2016', 660, 1120, 300],
-//         ['2017', 1030, 540, 350]
-// ]
   },
   methods: {
-
-    ...mapActions(['GET_Gromad', 'UPPDATE_CHART', 'GET_GromadPosicion']),
+    ...mapActions(['GET_Gromad', 'GET_GromadPosicion']),
     selectRegionFunc: function selectRegionFunc(idx){
       if (this.selectRegionIdx === idx){
         this.selectRegionSelectDataIdx = ''
@@ -220,38 +167,32 @@ export default {
       }
       else{
         this.selectRegionIdx = idx
-        this.dataCharts = {
-          data: this.dataValue
-        }
-        this.UPPDATE_CHART(this.dataCharts);
-        this.GET_GromadPosicion([this.typeOblast, this.year, this.selectRegionSelectDataIdx, 'Житомирська,Кіровоградська'])
       }
+      this.GET_GromadPosicion([this.typeOblast, '2021', this.selectRegionSelectDataIdx, 'Житомирська,Кіровоградська'])
     },
     selectRegionSelectDataFunc: function selectRegionSelectDataFunc(idxs){
       this.selectRegionSelectDataIdx = idxs
-      this.dataCharts = {
-        data: this.dataValue
-      }
-      this.UPPDATE_CHART(this.dataCharts);
-      this.GET_GromadPosicion([this.typeOblast, this.year, this.selectRegionSelectDataIdx, 'Житомирська,Кіровоградська'])
+      this.GET_GromadPosicion([this.typeOblast, '2021', this.selectRegionSelectDataIdx, 'Житомирська,Кіровоградська'])
     },
-    sortDataLowToHideFunc: function sortDataLowToHideFunc(idx){
-      this.sortDataLowToHide = idx
+    selectYear: function selectYear(data){
+      this.year = data
     },
-    sortDataChartFunc: function sortDataChartFunc(idx){
-      this.sortDataChart = idx
+    activeSelectSortFunc: function activeSelectSortFunc(data){
+      this.sortDataChart = data
+    },
+    sortAndTopToButtomFunc: function sortAndTopToButtomFunc(data){
+      this.sortDataLowToHide = data
     }
   },
   async created() {
+    await this.GET_GromadPosicion([this.typeOblast, '2021', this.selectRegionSelectDataIdx, 'Житомирська,Кіровоградська'])
+    await this.GET_GromadPosicion([this.typeOblast, '2021', this.selectRegionSelectDataIdx, 'Житомирська,Кіровоградська'])
     await this.GET_Gromad(this.a)
-    await this.GET_GromadPosicion([this.typeOblast, this.year, this.selectRegionSelectDataIdx, 'Житомирська,Кіровоградська'])
-    this.dataCharts = {
-      data: this.dataValue
-    }
-    await this.UPPDATE_CHART(this.dataCharts);
   },
-  async mounted() {
-    await this.GET_GromadPosicion([this.typeOblast, this.year, this.selectRegionSelectDataIdx, 'Житомирська,Кіровоградська'])
+  async mounted(){
+    await this.GET_GromadPosicion([this.typeOblast, '2021', this.selectRegionSelectDataIdx, 'Житомирська,Кіровоградська'])
+    await this.GET_GromadPosicion([this.typeOblast, '2021', this.selectRegionSelectDataIdx, 'Житомирська,Кіровоградська'])
+    await this.GET_Gromad(this.a)
   }
 }
 </script>
@@ -356,8 +297,15 @@ span{
   display:flex;
 }
 .selectSort > p{
+  display:flex;
+  align-self:center;
+  align-items:center;
+  align-content:center;
+  justify-content:center;
+  justify-items:center;
+  justify-self:center;
   color:#333333;
-  width:97px;
+  width:120px;
   margin-top:-8px;
   margin-right:24px;
   cursor:pointer;

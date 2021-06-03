@@ -201,7 +201,8 @@ h1{
   margin-top:60px;
 }
 path:hover{
-  fill:#FFE24C;
+  fill:#2d60f8;
+  cursor:pointer;
 }
 
 
@@ -249,6 +250,11 @@ h1 {
 }
 .activeMap{
   fill:#FFE24C;
+  cursor:none;
+}
+.activeMap:hover{
+  fill:#FFE24C;
+  cursor:inherit;
 }
 
 </style>

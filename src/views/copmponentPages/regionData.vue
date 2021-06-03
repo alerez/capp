@@ -6,55 +6,24 @@
     <div>
       <back-next v-bind:backNextData="this.backNextData"/>
     </div>
-<!--    <div style="display:flex;">-->
-<!--      <div class="selectData">-->
-<!--        <div v-for="(index, idx) in dataGroups" :key="index">-->
-<!--          <div class="selectRegionDataStyle" @click="selectRegionFunc(idx)">-->
-<!--            <p>{{index.name}}</p>-->
-<!--&lt;!&ndash;            = index.name[0].toUpperCase() + index.name.substring(1).toLowerCase()&ndash;&gt;-->
-<!--          </div>-->
-<!--            <div v-for="(indexs, idxs) in index.vars" :key="idxs" @click="selectRegionSelectDataFunc(idxs)" class="selectRegionSelectData">-->
-<!--              <div v-if="idx === selectRegionIdx">-->
-<!--                <p>{{indexs.name}}</p>-->
-<!--                {{idxs}}-->
-<!--              </div>-->
-<!--              <p>{{indexs}}</p>-->
-<!--              </div>-->
-<!--          </div>-->
-<!--      </div>-->
-<!--&lt;!&ndash;      <div v-if="this.selectRegionIdx === 'ДЕМОГРАФІЯ'" class="selectRegionDataSelect">&ndash;&gt;-->
-<!--&lt;!&ndash;        <div v-for="(indexs, idxs) in this.dataGroupsSelectRegionVars" :key="idxs" @click="selectRegionSelectDataFunc(idxs)" class="selectRegionSelectData">&ndash;&gt;-->
-<!--&lt;!&ndash;          <p>{{indexs.name}}</p>&ndash;&gt;-->
-<!--&lt;!&ndash;          {{idxs}}&ndash;&gt;-->
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
-<!--&lt;!&ndash;      </div>&ndash;&gt;-->
-<!--&lt;!&ndash;      <div v-else-if="this.dataGroups === 'ЕКОНОМІКА'" class="selectRegionDataSelect">&ndash;&gt;-->
-<!--&lt;!&ndash;        <div v-for="(indexs, idxs) in this.dataGroupsSelectRegionVars" :key="idxs" @click="selectRegionSelectDataFunc(idxs)" class="selectRegionSelectData">&ndash;&gt;-->
-<!--&lt;!&ndash;          <p>{{indexs.name}}</p>&ndash;&gt;-->
-<!--&lt;!&ndash;          {{idxs}}&ndash;&gt;-->
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
-<!--&lt;!&ndash;      </div>&ndash;&gt;-->
-<!--    </div>-->
     <div class="selectData">
       <div style="display:flex">
+<!--        Выбор Груп показателей-->
         <div>
           <div v-for="(index, idx) in getDatasGromad.groups" :key="idx">
-          <div @click="selectRegionFunc(idx)" v-bind:class="(idx === selectRegionIdx) ? 'selectRegionDataActive' : 'selectRegionData' " class="selectRegionDataStyle">
-            {{index.name = index.name[0].toUpperCase() + index.name.substring(1).toLowerCase()}}
+            <div @click="selectRegionFunc(idx)" v-bind:class="(idx === selectRegionIdx) ? 'selectRegionDataActive' : 'selectRegionData' " class="selectRegionDataStyle">
+              {{index.name = index.name[0].toUpperCase() + index.name.substring(1).toLowerCase()}}
+            </div>
           </div>
-          <!--          <div v-if="idx === selectRegionIdx">-->
-          <!--            <div style="margin-left:20px" v-for="(indexs, idxs) in dataGroupsSelectRegionVars" :key="idxs" @click="selectRegionSelectDataFunc(idxs)" class="selectRegionSelectData">-->
-          <!--              {{indexs.name}}-->
-          <!--            </div>-->
-          <!--          </div>-->
         </div>
-        </div>
+<!--        Выбор Показателей-->
         <div style="margin-top:-5px;">
           <div v-for="(indexs, idxs) in dataGroupsSelectRegionVars" :key="idxs" @click="selectRegionSelectDataFunc(idxs)" v-bind:class="(idxs === selectRegionSelectDataIdx) ? 'selectRegionSelectDataActive' : 'selectRegionSelectData' " class="selectRegionDataSelect">
             {{indexs.name}}
           </div>
         </div>
       </div>
+<!--      График -->
       <div v-for="indexss in dataGroupsSelectRegionVarsDataIdx" :key="indexss">
         <div v-if="indexss === selectRegionSelectDataIdx">
           <chart-views class="charts"/>
